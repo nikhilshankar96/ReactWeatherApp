@@ -6,7 +6,7 @@ const useGlobalState = () => {
 		lat: 42.361145,
 		long: -71.057083,
 		loaded: false,
-		weather: {}
+		data: null
 	});
 
 	const actions = action => {
