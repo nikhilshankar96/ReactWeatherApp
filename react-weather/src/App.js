@@ -58,10 +58,9 @@ const App = () => {
 	}, []);
 
 	return (
-		<div className='App col sm12'>
+		<div className='App'>
 			{/* Nav */}
 			{/* <TopBar /> */}
-			<Dummy hide={hide} />
 			{!state.loaded && (
 				<div style={{ height: "100%" }}>
 					<div style={{ height: "20%" }}></div>
@@ -70,8 +69,9 @@ const App = () => {
 					<Dummy />
 				</div>
 			)}
-			{state.loaded && <WeatherContent data={state.data} />}
-			{/* Footer */}
+			{state.loaded && (
+				<WeatherContent className='container' data={state.data} />
+			)}
 			<div className='footer z-depth-2'>
 				<Footer />
 			</div>

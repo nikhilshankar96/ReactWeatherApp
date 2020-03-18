@@ -15,16 +15,15 @@ const WeatherContent = props => {
 	console.table(datevalues);
 
 	return (
-		<div className='row center-align' style={{ width: "100%" }}>
+		<div
+			className='row center-align container valign-wrapper '
+			style={{ width: "100%" }}
+		>
 			<div className='col s12'>
 				<div
-					className='card-panel z-depth-2 black-border'
+					className='card-panel z-depth-3 black-border'
 					style={{ border: ".08rem", borderStyle: " solid" }}
 				>
-					{data.currently.humidity} <br />
-					{data.currently.windSpeed} <br />
-					<hr />
-					<hr />
 					<div class='row'>
 						<div class='col s4'>
 							<p>
@@ -33,7 +32,7 @@ const WeatherContent = props => {
 							</p>
 						</div>
 						<div class='col s4'>
-							<h3>{data.currently.summary}</h3>
+							<h2>{data.currently.summary}</h2>
 						</div>
 						<div class='col s4'>
 							<p>
@@ -54,10 +53,10 @@ const WeatherContent = props => {
 					</div>
 					<div class='row'>
 						<div class='col s6'>
-							<h3>{data.currently.temperature} F</h3>
+							<h5> Wind Speed: {data.currently.windSpeed} Mph</h5>
 						</div>
 						<div class='col s6'>
-							<p>Feels like {data.currently.apparentTemperature} F</p>
+							<h5>Humidity: {data.currently.humidity} </h5>
 						</div>
 					</div>
 				</div>
