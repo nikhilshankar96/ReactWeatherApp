@@ -72,7 +72,7 @@ const App = () => {
 			{state.loaded && (
 				<WeatherContent className='container' data={state.data} />
 			)}
-			<div className='footer z-depth-2'>
+			<div className='footer z-depth-3 cyan darken-2 white-text'>
 				<Footer />
 			</div>
 		</div>
