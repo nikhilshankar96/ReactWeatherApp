@@ -1,9 +1,10 @@
 import React from "react";
 import Weather from "./Weather";
 import WeatherDaily from "./WeatherDaily";
+import Hourly from "./Hourly";
 
 const WeatherContent = props => {
-	const { data } = props;
+	const { data, current } = props;
 	let date = new Date(data.currently.time * 1000),
 		datevalues = [
 			date.getFullYear(),
@@ -11,21 +12,25 @@ const WeatherContent = props => {
 			date.getDate(),
 			date.getHours(),
 			date.getMinutes(),
-			date.getSeconds()
+			date.getSeconds(),
+			date.getDay()
 		];
 	const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 	const daily = data.daily.data;
+	// const logDay = e => console.log(e.target);
 	let dailyF = daily.map((day, index) => (
-		<WeatherDaily day={days[index]} daily={day} />
+		<WeatherDaily
+			key={index}
+			day={(datevalues[6] + 1 + index) % 7}
+			daily={day}
+			index={index}
+		/>
 	));
 
 	return (
 		<div className='row center-align container' style={{ width: "100%" }}>
 			<div className='col s12'>
-				<div
-				// className='card-panel z-depth-3 black-border'
-				// style={{ border: ".08rem", borderStyle: " solid" }}
-				>
+				<div>
 					<div className='row'>
 						<div className='col s4'>
 							<p>
@@ -34,23 +39,30 @@ const WeatherContent = props => {
 							</p>
 						</div>
 						<div className='col s4'>
-							<h2>{data.currently.summary}</h2>
+							<h5>
+								<strong>{days[datevalues[6]]}</strong>
+							</h5>
 						</div>
 						<div className='col s4'>
 							<p>
-								{datevalues[1]}/{datevalues[3]}/{datevalues[0]}
+								{datevalues[1]}/{datevalues[2]}/{datevalues[0]}
 							</p>
 						</div>
 						<div className='col s12'>
 							<Weather icon={data.currently.icon} />
+							<h2>
+								<strong>
+									<em>{data.currently.summary}</em>
+								</strong>
+							</h2>
 						</div>
 					</div>
 					<div className='row'>
 						<div className='col s6'>
-							<h2>{data.currently.temperature} F</h2>
+							<h3>{data.currently.temperature}</h3>
 						</div>
 						<div className='col s6'>
-							<h2>(Feels like {data.currently.apparentTemperature}F)</h2>
+							<h3>(Feels like {data.currently.apparentTemperature}F)</h3>
 						</div>
 					</div>
 					<div className='row'>
@@ -66,6 +78,7 @@ const WeatherContent = props => {
 					</div>
 				</div>
 			</div>
+			<Hourly daily={data.daily.data[1]} day={0} current={current} />
 		</div>
 	);
 };

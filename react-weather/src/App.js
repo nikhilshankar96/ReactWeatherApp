@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, Fragment } from "react";
 import "./App.css";
 
 //global state
@@ -46,7 +46,8 @@ const App = () => {
 							payload: {
 								...state,
 								loaded: true,
-								data: data
+								data: data,
+								current: data.currently.time * 1000
 							}
 						});
 					});
@@ -70,7 +71,13 @@ const App = () => {
 				</div>
 			)}
 			{state.loaded && (
-				<WeatherContent className='container' data={state.data} />
+				<Fragment>
+					<WeatherContent
+						className='container'
+						data={state.data}
+						current={state.current}
+					/>
+				</Fragment>
 			)}
 			<div className='footer z-depth-3 cyan darken-2 white-text'>
 				<Footer />

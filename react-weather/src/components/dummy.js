@@ -26,7 +26,7 @@ const Dummy = props => {
 	return (
 		!hide && (
 			<div className='container center-align'>
-				{status !== "" && <h1>Unable to retrieve location, refresh!</h1>}
+				{status !== "" && <h1>Locating...</h1>}
 				<a
 					className='red waves-effect waves-light btn-large pulse'
 					onClick={geoFindMe}

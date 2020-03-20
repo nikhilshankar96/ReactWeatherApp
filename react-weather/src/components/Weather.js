@@ -12,7 +12,6 @@ const Weather = props => {
 	// if (props.size) {
 	const { size } = props;
 	// }
-	console.log(icon);
 
 	return (
 		<div className='center-align'>
