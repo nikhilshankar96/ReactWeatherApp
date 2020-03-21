@@ -9,7 +9,8 @@ const useGlobalState = () => {
 		data: null,
 		current: null,
 		daily: null,
-		oWeather: null
+		oWeather: null,
+		oWeatherLoaded: false
 	});
 
 	const actions = action => {

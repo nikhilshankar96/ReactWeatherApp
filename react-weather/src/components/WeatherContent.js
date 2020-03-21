@@ -78,7 +78,7 @@ const WeatherContent = props => {
 					</div>
 				</div>
 			</div>
-			<Hourly daily={data.daily.data[1]} day={0} current={current} />
+			<Hourly daily={data.daily.data[1]} current={current} />
 		</div>
 	);
 };
