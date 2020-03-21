@@ -20,6 +20,9 @@ const Hourly = props => {
 		];
 	const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 	const getW = async q => {
+		console.log("GET W CALLED");
+		console.error("GET W CALLED");
+
 		const key = "d4a6d71c118517077ed0d0688b4dc2a6";
 		// if (!state.oWeatherLoaded) {
 		const res = await fetch(
@@ -35,9 +38,11 @@ const Hourly = props => {
 						oWeatherLoaded: true
 					}
 				});
+				console.log(data);
+
 				// return data;
 			})
-			.then(data => console.log(data))
+			// .then(data => console.log(data))
 			.catch(err => console.error(err));
 		// const data = res.list;
 		// const hourlyData = data.map((hour, index) => (
@@ -55,7 +60,14 @@ const Hourly = props => {
 	// if (!state.oWeatherLoaded) {
 	// 	getW("boston").then(data => data.map(hour => console.log(hour)));
 	// }
-	getW("boston");
+	useEffect(() => {
+		if (!!!state.oWeatherLoaded) {
+			getW("boston");
+		}
+		// return () => {
+		// 	cleanup
+		// }
+	}, [state]);
 
 	return (
 		<div className='row container'>
