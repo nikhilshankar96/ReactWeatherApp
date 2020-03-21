@@ -50,7 +50,8 @@ const App = () => {
 								current: data.currently.time * 1000
 							}
 						});
-					});
+					})
+					.catch(error => console.error(error));
 			});
 			console.log(state);
 		} else {
