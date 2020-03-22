@@ -20,11 +20,9 @@ const Hourly = props => {
 		];
 	const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 	const getW = async q => {
-		console.log("GET W CALLED");
-		console.error("GET W CALLED");
+		// console.log("GET W CALLED");
 
 		const key = "d4a6d71c118517077ed0d0688b4dc2a6";
-		// if (!state.oWeatherLoaded) {
 		const res = await fetch(
 			`http://api.openweathermap.org/data/2.5/forecast?q=${q}&appid=${key}`
 		)
@@ -38,28 +36,11 @@ const Hourly = props => {
 						oWeatherLoaded: true
 					}
 				});
-				console.log(data);
-
-				// return data;
+				// console.log(data);
 			})
-			// .then(data => console.log(data))
 			.catch(err => console.error(err));
-		// const data = res.list;
-		// const hourlyData = data.map((hour, index) => (
-		// 	<HourlyComponent key={index} hourly={hour} />
-		// ));
-		// console.log(data);
-
-		// return data;
-		// }
-		// return false;
 	};
-	// const hourlyData = getW("boston");
-	// if (hourlyData) console.log(hourlyData[0].main.temp);
-	// hourlyData.then(data => console.log(data));
-	// if (!state.oWeatherLoaded) {
-	// 	getW("boston").then(data => data.map(hour => console.log(hour)));
-	// }
+
 	useEffect(() => {
 		if (!!!state.oWeatherLoaded) {
 			getW("boston");
@@ -71,7 +52,6 @@ const Hourly = props => {
 
 	return (
 		<div className='row container'>
-			{/* {console.log(state.daily)} */}
 			<div className='col s12'>
 				<div className='col s6'>
 					<h5>
@@ -88,6 +68,13 @@ const Hourly = props => {
 			</div>
 			<Weather icon={daily.icon} size={"400px"} />
 			<h3>HourlyData</h3>
+			{state.oWeatherLoaded &&
+				state.oWeather.map((hour, index) => {
+					return (
+						<HourlyComponent key={index * 11} hourly={hour} index={index} />
+					);
+					// console.log(hour);
+				})}
 		</div>
 	);
 };
