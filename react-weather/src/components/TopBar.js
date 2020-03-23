@@ -1,13 +1,16 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 
 import Context from "../store/context";
 
-const TopBar = () => {
+const TopBar = (props) => {
 	const { state, actions } = useContext(Context);
+
 	const { location } = state;
 
+	// const { location } = props;
+
 	const getW = async q => {
-		// console.log("GET W CALLED");
+		console.log("GETW LOC: "+ q);
 
 		const key = "d4a6d71c118517077ed0d0688b4dc2a6";
 		const res = await fetch(
@@ -29,20 +32,40 @@ const TopBar = () => {
 				});
 			})
 			.catch(error => {
-				// console.log(error);
+				// actions({
+				// 	type: "setState",
+				// 	payload: {
+				// 		...state,
+				// 		loaded: false	
+				// 	}
+				// });
+				console.log(error);
+				
 			});
 		localStorage.setItem("state", JSON.stringify(state));
 	};
 
-	const setLoc = () => {
+	// const locFromProps = () => {
+	// 	setLoc
+	// }
+	
+	const setLoc = (propsLoc, flag = false) => {
+		if (flag) {
+			propsLoc !== '' && getW(propsLoc);
+		} else {
 		let loc = document.querySelector("#search").value;
 		// console.log(loc);
 		loc !== "" && getW(loc);
+		}
 	};
-
+	
 	useEffect(() => {
 		if (!state.oWeatherLoaded) {
-			getW(state.location);
+			// if (props.location) {
+				// getW(props.location);
+			// } else {
+			getW(location);
+			// }
 		}
 		// return () => {
 		// 	cleanup

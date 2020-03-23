@@ -9,16 +9,17 @@ import M from "materialize-css";
 const WeatherContent = ({ loc }) => {
 	const { state, actions } = useContext(Context);
 	const { data, current } = state;
-	let date = new Date(data.currently.time * 1000),
-		datevalues = [
-			date.getFullYear(),
-			date.getMonth() + 1,
-			date.getDate(),
-			date.getHours(),
-			date.getMinutes(),
-			date.getSeconds(),
-			date.getDay()
-		];
+	let time = data.currently.time;
+	let date = new Date(time * 1000);
+	let datevalues = [
+		date.getFullYear(),
+		date.getMonth() + 1,
+		date.getDate(),
+		date.getHours(),
+		date.getMinutes(),
+		date.getSeconds(),
+		date.getDay()
+	];
 	const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 	const daily = data.daily.data;
 	let dailyF = daily.map((day, index) => (

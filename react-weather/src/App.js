@@ -71,7 +71,7 @@ const App = () => {
 	return (
 		<div className='App'>
 			{/* Nav */}
-			<TopBar />
+			<TopBar location={"Nagpur"} flag={true} />
 			{!state.loaded && (
 				<div style={{ height: "100%" }}>
 					<div style={{ height: "20%" }}></div>
