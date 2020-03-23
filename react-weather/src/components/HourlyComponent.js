@@ -1,19 +1,19 @@
 import React from "react";
 
 const HourlyComponent = props => {
-	const { main, weather, wind, dt_txt, index } = props.hourly;
+	const { main, weather, wind, dt_txt, index, dt } = props.hourly;
+	const kToF = k => ((k - 273.15) * (9 / 5) + 32).toFixed(1);
 	return (
-		<div>
-			<h4>{index}</h4>
-			<h5>main</h5>
-			{main.temp}
-			{main.feels_like}
-			{main.temp_min}
-			{main.temp_max}
-			{main.humidity}
+		<div className='card-content'>
+			<h5> Temp: {kToF(main.temp)} °F</h5>
+			<h6>(Feels like {kToF(main.feels_like)} °F)</h6>
+			{main.temp_min} <br />
+			{main.temp_max} <br />
+			{main.humidity} <br />
 			<h5>{weather.main}</h5>
 			<h6>{wind.speed}</h6>
-			<h4>{dt_txt}</h4>
+			<h5>{dt}</h5>
+			<h5>{dt_txt}</h5>
 		</div>
 	);
 };

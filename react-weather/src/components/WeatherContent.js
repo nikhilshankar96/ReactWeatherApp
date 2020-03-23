@@ -21,9 +21,10 @@ const WeatherContent = props => {
 	let dailyF = daily.map((day, index) => (
 		<WeatherDaily
 			key={index}
-			day={(datevalues[6] + 1 + index) % 7}
+			day={datevalues[6] + 1 + index}
 			daily={day}
 			index={index}
+			dom={datevalues[2]}
 		/>
 	));
 

@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import Context from "../store/context";
+import Moment from "react-moment";
 
 import Weather from "./Weather";
 import HourlyComponent from "./HourlyComponent";
@@ -19,6 +20,7 @@ const Hourly = props => {
 			date.getDay()
 		];
 	const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
 	const getW = async q => {
 		// console.log("GET W CALLED");
 
@@ -36,7 +38,7 @@ const Hourly = props => {
 						oWeatherLoaded: true
 					}
 				});
-				// console.log(data);
+				console.log(data);
 			})
 			.catch(err => console.error(err));
 	};
@@ -51,7 +53,7 @@ const Hourly = props => {
 	}, [state]);
 
 	return (
-		<div className='row container'>
+		<div className='row'>
 			<div className='col s12'>
 				<div className='col s6'>
 					<h5>
@@ -63,18 +65,36 @@ const Hourly = props => {
 				<div className='col s6'>
 					<h5>
 						<strong>{daily.summary}</strong>
+						{/* <Moment unix>{state.current}</Moment> */}
 					</h5>
 				</div>
 			</div>
 			<Weather icon={daily.icon} size={"400px"} />
 			<h3>HourlyData</h3>
-			{state.oWeatherLoaded &&
-				state.oWeather.map((hour, index) => {
-					return (
-						<HourlyComponent key={index * 11} hourly={hour} index={index} />
-					);
-					// console.log(hour);
-				})}
+			{console.log(current)}
+			{state.daily && (
+				<div className='row'>
+					{console.log("current: " + datevalues[2])}
+					{state.oWeatherLoaded &&
+						state.oWeather.map((hour, index) => {
+							let dt = "" + hour.dt_txt[8] + hour.dt_txt[9];
+
+							console.log(dt);
+
+							if (dt == datevalues[2]) {
+								return (
+									<div key={index * 13} className='col s6 l3 card '>
+										<HourlyComponent
+											key={index * 111}
+											hourly={hour}
+											index={index}
+										/>
+									</div>
+								);
+							}
+						})}
+				</div>
+			)}
 		</div>
 	);
 };

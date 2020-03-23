@@ -4,7 +4,7 @@ import Context from "../store/context";
 
 const WeatherDaily = props => {
 	const { state, actions } = useContext(Context);
-	const { daily, day } = props;
+	const { daily, day, dom } = props;
 	const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 	// console.log(daily);
 
@@ -24,7 +24,9 @@ const WeatherDaily = props => {
 			<div className='card col s6 l3' style={{ height: "280px" }}>
 				<div className='card-content'>
 					<span className='card-title'>
-						<strong>{days[day]}</strong>
+						<strong>
+							{days[day % 7]} {dom + day}
+						</strong>
 					</span>
 					<ul>
 						<li>

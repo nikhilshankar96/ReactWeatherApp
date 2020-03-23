@@ -47,7 +47,7 @@ const App = () => {
 								...state,
 								loaded: true,
 								data: data,
-								current: data.currently.time * 1000
+								current: data.currently.time
 							}
 						});
 					})
