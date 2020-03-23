@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import Weather from "./Weather";
 import WeatherDaily from "./WeatherDaily";
 import Hourly from "./Hourly";
+import TodayHourly from "./TodayHourly";
 import M from "materialize-css";
 
 const WeatherContent = props => {
@@ -75,10 +76,12 @@ const WeatherContent = props => {
 							<h5>Humidity: {data.currently.humidity} </h5>
 						</div>
 					</div>
-					<div className=''>
+					<div className='row'>
 						<h2>{data.hourly.summary}</h2>
-
 						{console.log(data.hourly)}
+						{data.hourly.data.map((hour, index) => (
+							<TodayHourly hour={hour} index={index} key={index} />
+						))}
 					</div>
 					<div className='row' style={{ padding: "5px" }}>
 						<h2>This week</h2>

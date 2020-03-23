@@ -20,6 +20,18 @@ const App = () => {
 	let hide = true;
 
 	useEffect(() => {
+		// if (localStorage.getItem("state")) {
+		// 	actions({
+		// 		type: "setState",
+		// 		payload: {
+		// 			...state,
+		// 			state: JSON.parse(localStorage.getItem("state"))
+		// 		}
+		// 	});
+		// } else {
+		// 	localStorage.setItem("state", JSON.stringify(state));
+		// }
+
 		const { long, lat } = state;
 
 		if (navigator.geolocation) {
@@ -54,7 +66,7 @@ const App = () => {
 		} else {
 			hide = false;
 		}
-	}, []);
+	}, [state]);
 
 	return (
 		<div className='App'>

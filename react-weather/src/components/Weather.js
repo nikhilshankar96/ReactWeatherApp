@@ -6,9 +6,9 @@ const Weather = props => {
 	const icon = props.icon
 		.toUpperCase()
 		.split("-")
-		.join("_")
-		.split(" ")
 		.join("_");
+	// .split(" ")
+	// .join("_")
 	// if (props.size) {
 	const { size } = props;
 	// }
