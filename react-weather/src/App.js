@@ -20,8 +20,6 @@ const App = () => {
 	let hide = true;
 
 	useEffect(() => {
-		console.log("didmount");
-
 		const { long, lat } = state;
 
 		if (navigator.geolocation) {
@@ -53,7 +51,6 @@ const App = () => {
 					})
 					.catch(error => console.error(error));
 			});
-			console.log(state);
 		} else {
 			hide = false;
 		}

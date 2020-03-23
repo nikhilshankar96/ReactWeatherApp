@@ -6,7 +6,6 @@ const WeatherDaily = props => {
 	const { state, actions } = useContext(Context);
 	const { daily, day, dom } = props;
 	const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-	// console.log(daily);
 
 	return (
 		<div
@@ -21,7 +20,7 @@ const WeatherDaily = props => {
 				})
 			}
 		>
-			<div className='card col s6 l3' style={{ height: "280px" }}>
+			<div className='card col s6 l3 ' style={{ height: "280px" }}>
 				<div className='card-content'>
 					<span className='card-title'>
 						<strong>

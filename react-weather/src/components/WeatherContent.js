@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Weather from "./Weather";
 import WeatherDaily from "./WeatherDaily";
 import Hourly from "./Hourly";
+import M from "materialize-css";
 
 const WeatherContent = props => {
 	const { data, current } = props;
@@ -74,12 +75,20 @@ const WeatherContent = props => {
 							<h5>Humidity: {data.currently.humidity} </h5>
 						</div>
 					</div>
+					<div className=''>
+						<h2>{data.hourly.summary}</h2>
+
+						{console.log(data.hourly)}
+					</div>
 					<div className='row' style={{ padding: "5px" }}>
+						<h2>This week</h2>
 						{dailyF}
 					</div>
 				</div>
 			</div>
-			<Hourly daily={data.daily.data[1]} current={current} />
+			<div id='hourlyDiv'>
+				<Hourly daily={data.daily.data[1]} current={current} />
+			</div>
 		</div>
 	);
 };

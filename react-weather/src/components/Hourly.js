@@ -38,7 +38,6 @@ const Hourly = props => {
 						oWeatherLoaded: true
 					}
 				});
-				console.log(data);
 			})
 			.catch(err => console.error(err));
 	};
@@ -53,33 +52,24 @@ const Hourly = props => {
 	}, [state]);
 
 	return (
-		<div className='row'>
-			<div className='col s12'>
-				<div className='col s6'>
-					<h5>
+		state.daily && (
+			<div className='row '>
+				<div className='col s12'>
+					<h4>
+						3-Hourly forecast for{" "}
 						<strong>{days[(datevalues[6] + 1) % 7]}</strong>
-						,&nbsp;
+						&nbsp;
 						{datevalues[1]}/{datevalues[2]}/{datevalues[0]}
-					</h5>
-				</div>
-				<div className='col s6'>
+					</h4>
 					<h5>
 						<strong>{daily.summary}</strong>
-						{/* <Moment unix>{state.current}</Moment> */}
 					</h5>
 				</div>
-			</div>
-			<Weather icon={daily.icon} size={"400px"} />
-			<h3>HourlyData</h3>
-			{console.log(current)}
-			{state.daily && (
-				<div className='row'>
-					{console.log("current: " + datevalues[2])}
+				<Weather icon={daily.icon} size={"400px"} />
+				{/* <div className='row'>
 					{state.oWeatherLoaded &&
 						state.oWeather.map((hour, index) => {
 							let dt = "" + hour.dt_txt[8] + hour.dt_txt[9];
-
-							console.log(dt);
 
 							if (dt == datevalues[2]) {
 								return (
@@ -93,9 +83,28 @@ const Hourly = props => {
 								);
 							}
 						})}
+				</div> */}
+				<div className='row'>
+					{state.oWeatherLoaded &&
+						state.oWeather.map((hour, index) => {
+							let dt = "" + hour.dt_txt[8] + hour.dt_txt[9];
+
+							if (dt == datevalues[2]) {
+								return (
+									<div key={index * 13} className='col s6 l3 card '>
+										<HourlyComponent
+											key={index * 111}
+											hourly={hour}
+											index={index}
+										/>
+									</div>
+								);
+							}
+						})}
+					{!state.oWeatherLoaded && "Loading..."}
 				</div>
-			)}
-		</div>
+			</div>
+		)
 	);
 };
 
