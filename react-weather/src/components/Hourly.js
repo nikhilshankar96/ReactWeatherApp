@@ -21,35 +21,41 @@ const Hourly = props => {
 		];
 	const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-	const getW = async q => {
-		// console.log("GET W CALLED");
+	// const getW = async q => {
+	// 	// console.log("GET W CALLED");
 
-		const key = "d4a6d71c118517077ed0d0688b4dc2a6";
-		const res = await fetch(
-			`http://api.openweathermap.org/data/2.5/forecast?q=${q}&appid=${key}`
-		)
-			.then(res => res.json())
-			.then(data => {
-				actions({
-					type: "setState",
-					payload: {
-						...state,
-						oWeather: data.list,
-						oWeatherLoaded: true
-					}
-				});
-			})
-			.catch(err => console.error(err));
-	};
+	// 	const key = "d4a6d71c118517077ed0d0688b4dc2a6";
+	// 	const res = await fetch(
+	// 		`http://api.openweathermap.org/data/2.5/forecast?q=${q}&appid=${key}`
+	// 	)
+	// 		.then(res => res.json())
+	// 		.then(data => {
+	// 			console.log(data);
+	// 			console.log(data.city.cood);
 
-	useEffect(() => {
-		if (!!!state.oWeatherLoaded) {
-			getW("boston");
-		}
-		// return () => {
-		// 	cleanup
-		// }
-	}, [state]);
+	// 			actions({
+	// 				type: "setState",
+	// 				payload: {
+	// 					...state,
+	// 					lat: "",
+	// 					long: "",
+	// 					oWeather: data.list,
+	// 					oWeatherLoaded: true
+	// 				}
+	// 			});
+	// 		})
+	// 		.catch(err => console.error(err));
+	// 	console.log(res);
+	// };
+
+	// useEffect(() => {
+	// 	if (!!!state.oWeatherLoaded) {
+	// 		getW(state.location);
+	// 	}
+	// 	// return () => {
+	// 	// 	cleanup
+	// 	// }
+	// }, [state]);
 
 	return (
 		state.daily && (

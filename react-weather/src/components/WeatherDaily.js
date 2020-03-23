@@ -38,8 +38,8 @@ const WeatherDaily = props => {
 						</li>
 						<li>
 							<h6>
-								Hi: {daily.temperatureHigh} <strong>/</strong> Lo:{" "}
-								{daily.temperatureLow}
+								Hi: {daily.temperatureHigh}°F <strong>/</strong> Lo:{" "}
+								{daily.temperatureLow}°F
 							</h6>
 						</li>
 					</ul>

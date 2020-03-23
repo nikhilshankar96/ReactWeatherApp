@@ -14,52 +14,48 @@ const TodayHourly = props => {
 	];
 	return (
 		<div
-			className='row col s3 container valign-wrapper'
-			style={{ border: " solid 1px", padding: "2px", height: "100px" }}
+			className='row col s12 m6  l4 container valign-wrapper card card-content'
+			style={{
+				border: " solid 1px",
+				height: "100px"
+			}}
 		>
-			<div
-				style={{ width: "20%", display: " inline-block", border: " solid 1px" }}
-			>
-				<Weather icon={props.hour.icon} size={"40px"} />
+			<div style={{ width: "15%", display: " inline-block", padding: "3px" }}>
+				<Weather icon={props.hour.icon} size={"45px"} />
 			</div>
 			<div
-				style={{ width: "25%", display: " inline-block", border: " solid 1px" }}
+				style={{
+					width: "15%",
+					display: " block",
+					padding: "3px"
+				}}
 			>
-				<p style={{ fontSize: "20px" }}>{datevalues[3] + ":00"}</p>
+				<p style={{ fontSize: "18px" }}>
+					{(datevalues[3] < 10 ? "0" : "") + datevalues[3] + ":00"}
+				</p>
 			</div>
 			<div
-				style={{ width: "30%", display: " inline-block", border: " solid 1px" }}
+				style={{
+					width: "45%",
+					display: " inline-block",
+					padding: "3px"
+				}}
 			>
 				<p style={{ fontSize: "20px" }}>{props.hour.summary}</p>
 			</div>
 			<div
-				style={{ width: "25%", display: " inline-block", border: " solid 1px" }}
+				style={{
+					width: "23%",
+					display: " inline-block",
+					padding: "3px"
+				}}
 			>
-				<p style={{ fontSize: "20px" }}>{props.hour.temperature} </p>
+				<p style={{ fontSize: "18px" }}>
+					{props.hour.temperature.toFixed(1)}°F
+				</p>
 			</div>
 		</div>
 	);
 };
 
 export default TodayHourly;
-
-/*
-time: 1584982800
-summary: "Overcast"
-icon: "cloudy"
-precipIntensity: 0.0006
-precipProbability: 0.05
-precipType: "rain"
-temperature: 38.31
-apparentTemperature: 31.5
-dewPoint: 25.76
-humidity: 0.6
-pressure: 1034
-windSpeed: 10.09
-windGust: 17.24
-windBearing: 128
-cloudCover: 0.92
-uvIndex: 3
-visibility: 10
-ozone: 357.1
- */

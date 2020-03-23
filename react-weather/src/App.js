@@ -20,17 +20,17 @@ const App = () => {
 	let hide = true;
 
 	useEffect(() => {
-		// if (localStorage.getItem("state")) {
-		// 	actions({
-		// 		type: "setState",
-		// 		payload: {
-		// 			...state,
-		// 			state: JSON.parse(localStorage.getItem("state"))
-		// 		}
-		// 	});
-		// } else {
-		// 	localStorage.setItem("state", JSON.stringify(state));
-		// }
+		if (localStorage.getItem("state")) {
+			actions({
+				type: "setState",
+				payload: {
+					...state,
+					state: JSON.parse(localStorage.getItem("state"))
+				}
+			});
+		} else {
+			localStorage.setItem("state", JSON.stringify(state));
+		}
 
 		const { long, lat } = state;
 
@@ -66,12 +66,12 @@ const App = () => {
 		} else {
 			hide = false;
 		}
-	}, [state]);
+	}, [state.location]);
 
 	return (
 		<div className='App'>
 			{/* Nav */}
-			{/* <TopBar /> */}
+			<TopBar />
 			{!state.loaded && (
 				<div style={{ height: "100%" }}>
 					<div style={{ height: "20%" }}></div>
@@ -80,15 +80,7 @@ const App = () => {
 					<Dummy />
 				</div>
 			)}
-			{state.loaded && (
-				<Fragment>
-					<WeatherContent
-						className='container'
-						data={state.data}
-						current={state.current}
-					/>
-				</Fragment>
-			)}
+			{state.loaded && <WeatherContent loc={state.location} />}
 			<div className='footer z-depth-3 cyan darken-2 white-text'>
 				<Footer />
 			</div>
