@@ -80,7 +80,7 @@ const App = () => {
 					<Dummy />
 				</div>
 			)}
-			{state.loaded && <WeatherContent loc={state.location} />}
+			{state.loaded && <WeatherContent loc={"Boston"} />}
 			<div className='footer z-depth-3 cyan darken-2 white-text'>
 				<Footer />
 			</div>

@@ -6,7 +6,8 @@ import Hourly from "./Hourly";
 import TodayHourly from "./TodayHourly";
 import M from "materialize-css";
 
-const WeatherContent = ({ loc }) => {
+const WeatherContent = props => {
+	const { loc } = props;
 	const { state, actions } = useContext(Context);
 	const { data, current } = state;
 	let time = data.currently.time;
@@ -32,11 +33,16 @@ const WeatherContent = ({ loc }) => {
 		/>
 	));
 	useEffect(() => {
-		// console.log("UseEffect");
-		// console.log(state);
-		// console.log(state.location);
-		// console.log("loc = " + loc);
-		// forceUpdate();
+		console.log("UseEffect");
+		if (loc) {
+			actions({
+				type: "setState",
+				payload: {
+					...state,
+					location: loc
+				}
+			});
+		}
 	}, [loc]);
 
 	return (
