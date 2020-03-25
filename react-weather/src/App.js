@@ -1,4 +1,5 @@
 import React, { useEffect, useContext, Fragment } from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "./App.css";
 
 //global state
@@ -9,28 +10,29 @@ import "materialize-css/dist/css/materialize.min.css";
 import M from "materialize-css";
 
 //components
-import TopBar from "./components/TopBar";
-import Footer from "./components/Footer";
-import WeatherContent from "./components/WeatherContent";
-import Dummy from "./components/dummy";
-import Spinner from "./components/Spinner";
+import Home from "./Home";
+// import TopBar from "./components/TopBar";
+// import Footer from "./components/Footer";
+// import WeatherContent from "./components/WeatherContent";
+// import Dummy from "./components/dummy";
+// import Spinner from "./components/Spinner";
 
 const App = () => {
 	const { state, actions } = useContext(Context);
 	let hide = true;
 
 	useEffect(() => {
-		if (localStorage.getItem("state")) {
-			actions({
-				type: "setState",
-				payload: {
-					...state,
-					state: JSON.parse(localStorage.getItem("state"))
-				}
-			});
-		} else {
-			localStorage.setItem("state", JSON.stringify(state));
-		}
+		// if (localStorage.getItem("state")) {
+		// 	actions({
+		// 		type: "setState",
+		// 		payload: {
+		// 			...state,
+		// 			state: JSON.parse(localStorage.getItem("state"))
+		// 		}
+		// 	});
+		// } else {
+		// 	localStorage.setItem("state", JSON.stringify(state));
+		// }
 
 		const { long, lat } = state;
 
@@ -69,22 +71,13 @@ const App = () => {
 	}, [state.location]);
 
 	return (
-		<div className='App'>
-			{/* Nav */}
-			<TopBar location={"Nagpur"} flag={true} />
-			{!state.loaded && (
-				<div style={{ height: "100%" }}>
-					<div style={{ height: "20%" }}></div>
-					<Spinner className='center-align' />
-					<div style={{ height: "20%" }}></div>
-					<Dummy />
-				</div>
-			)}
-			{state.loaded && <WeatherContent loc={"Boston"} />}
-			<div className='footer z-depth-3 cyan darken-2 white-text'>
-				<Footer />
-			</div>
-		</div>
+		<Router>
+			<Switch>
+				<Route path='/'>
+					<Home location={"Nagpur"} />
+				</Route>
+			</Switch>
+		</Router>
 	);
 };
 

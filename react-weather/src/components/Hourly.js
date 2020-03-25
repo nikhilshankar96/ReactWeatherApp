@@ -93,8 +93,6 @@ const Hourly = props => {
 				<div className='row'>
 					{state.oWeatherLoaded &&
 						state.oWeather.map((hour, index) => {
-							console.log(hour);
-
 							let dt = "" + hour.dt_txt[8] + hour.dt_txt[9];
 
 							if (dt == datevalues[2]) {

@@ -3,8 +3,8 @@ import { useState } from "react";
 const useGlobalState = () => {
 	const [state, setState] = useState({
 		location: "",
-		lat: 42.361145,
-		long: -71.057083,
+		lat: 0,
+		long: 0,
 		loaded: false,
 		data: null,
 		current: null,
