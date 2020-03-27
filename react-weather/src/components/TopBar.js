@@ -11,8 +11,9 @@ const TopBar = props => {
 	const getW = async q => {
 		// console.log("getw location : " + location);
 		const key = "d4a6d71c118517077ed0d0688b4dc2a6";
+		const proxy = "https://cors-anywhere.herokuapp.com/";
 		const res = await fetch(
-			`https://api.openweathermap.org/data/2.5/forecast?q=${q}&appid=${key}`
+			`${proxy}https://api.openweathermap.org/data/2.5/forecast?q=${q}&appid=${key}`
 		)
 			.then(res => res.json())
 			.then(data => {
