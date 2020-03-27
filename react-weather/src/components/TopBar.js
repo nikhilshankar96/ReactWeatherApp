@@ -12,7 +12,7 @@ const TopBar = props => {
 
 		const key = "d4a6d71c118517077ed0d0688b4dc2a6";
 		const res = await fetch(
-			`http://api.openweathermap.org/data/2.5/forecast?q=${q}&appid=${key}`
+			`https://api.openweathermap.org/data/2.5/forecast?q=${q}&appid=${key}`
 		)
 			.then(res => res.json())
 			.then(data => {
