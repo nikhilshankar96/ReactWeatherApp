@@ -22,7 +22,7 @@ const App = () => {
 		<Router>
 			<Switch>
 				<Route path='/' exact>
-					<Home location={"Nagpur"} flag={false} />
+					<Home location={"Boston"} flag={false} />
 				</Route>
 				<Route
 					path='/:url'

@@ -43,7 +43,7 @@ const WeatherContent = props => {
 		state.loaded && (
 			<div className='center-align container' style={{ width: "100%" }}>
 				<div className='col s12'>
-					<h3>{state.location}</h3>
+					{/* <h3>{state.location}</h3> */}
 					<div>
 						<div className='row'>
 							<div className='col s4'>

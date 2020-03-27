@@ -1,22 +1,18 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 
 import Context from "../store/context";
 
 const TopBar = props => {
 	const { state, actions } = useContext(Context);
+	const [location, setLocation] = useState(props.location);
 
-	const { location } = props;
 	console.log("topbar location :" + location);
 
 	const getW = async q => {
 		console.log("getw location : " + location);
 		const key = "d4a6d71c118517077ed0d0688b4dc2a6";
 		const res = await fetch(
-<<<<<<< HEAD
 			`https://api.openweathermap.org/data/2.5/forecast?q=${q}&appid=${key}`
-=======
-			`http://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=${key}`
->>>>>>> e356b68a96f68be2db04adc0acb9a78e79077d48
 		)
 			.then(res => res.json())
 			.then(data => {
@@ -68,7 +64,16 @@ const TopBar = props => {
 	const setLoc = e => {
 		e.preventDefault();
 		let loc = document.querySelector("#search").value;
-		loc !== "" && getW(loc);
+		loc !== "" &&
+			actions({
+				type: "setState",
+				payload: {
+					...state,
+					loaded: false,
+					location: loc
+				}
+			});
+		loc !== "" && setLocation(loc);
 	};
 
 	useEffect(() => {
