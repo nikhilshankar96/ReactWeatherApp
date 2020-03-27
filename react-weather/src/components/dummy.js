@@ -1,8 +1,8 @@
-import React, { useContext } from "react";
-import Context from "../store/context";
+import React from "react";
+// import Context from "../store/context";
 
 const Dummy = props => {
-	const { hide } = props;
+	// const { hide } = props;
 	let status = "11";
 	function geoFindMe() {
 		function success(position) {
@@ -11,8 +11,8 @@ const Dummy = props => {
 
 		function error() {
 			status = "Unable to retrieve your location";
-			console.log("Unable to retrieve location");
-			window.location.reload(true);
+			// console.log("Unable to retrieve location");
+			// window.location.reload(true);
 		}
 
 		if (!navigator.geolocation) {
@@ -24,17 +24,17 @@ const Dummy = props => {
 	}
 
 	return (
-		!hide && (
-			<div className='container center-align'>
-				{status !== "" && <h1>Locating...</h1>}
-				<a
-					className='red waves-effect waves-light btn-large pulse'
-					onClick={geoFindMe}
-				>
-					<i className='material-icons right'>gps_fixed</i>Get Location
-				</a>
-			</div>
-		)
+		// !hide && (
+		<div className='container center-align'>
+			{status !== "" && <h1>Locating...</h1>}
+			<a
+				className='red waves-effect waves-light btn-large pulse'
+				onClick={geoFindMe}
+			>
+				<i className='material-icons right'>gps_fixed</i>Get Location
+			</a>
+		</div>
+		// )
 	);
 };
 
