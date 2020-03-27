@@ -15,7 +15,13 @@ import "materialize-css/dist/css/materialize.min.css";
 const Home = props => {
 	const { state, actions } = useContext(Context);
 	let locc = props.flag ? props.match.params.url.toString() : "Tokyo";
-	// console.log("Home location : " + locc);
+	if (locc.includes("ReactWeatherApp/")) {
+		locc = locc.replace('ReactWeatherApp/")', "");
+	}
+	if (locc.includes("/")) {
+		locc = locc.replace('/")', "");
+	}
+	console.log("Home location : " + locc);
 
 	useEffect(() => {
 		actions({
