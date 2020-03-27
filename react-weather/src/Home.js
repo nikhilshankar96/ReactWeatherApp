@@ -15,7 +15,7 @@ import "materialize-css/dist/css/materialize.min.css";
 const Home = props => {
 	const { state, actions } = useContext(Context);
 	let locc = props.flag ? props.match.params.url.toString() : "Tokyo";
-	console.log("Home location : " + locc);
+	// console.log("Home location : " + locc);
 
 	useEffect(() => {
 		actions({

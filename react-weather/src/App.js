@@ -25,7 +25,13 @@ const App = () => {
 					<Home location={"Boston"} flag={false} />
 				</Route>
 				<Route
+					path='/ReactWeatherApp/:url'
+					exact
+					render={props => <Home {...props} flag={true} />}
+				></Route>
+				<Route
 					path='/:url'
+					exact
 					render={props => <Home {...props} flag={true} />}
 				></Route>
 			</Switch>

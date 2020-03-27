@@ -6,10 +6,10 @@ const TopBar = props => {
 	const { state, actions } = useContext(Context);
 	const [location, setLocation] = useState(props.location);
 
-	console.log("topbar location :" + location);
+	// // console.log("topbar location :" + location);
 
 	const getW = async q => {
-		console.log("getw location : " + location);
+		// console.log("getw location : " + location);
 		const key = "d4a6d71c118517077ed0d0688b4dc2a6";
 		const res = await fetch(
 			`https://api.openweathermap.org/data/2.5/forecast?q=${q}&appid=${key}`
@@ -30,15 +30,15 @@ const TopBar = props => {
 			})
 			.then(() => fetchDarkSky(state.lat, state.long))
 			.catch(error => {
-				console.log(error);
+				// console.log(error);
 			});
-		console.log(res !== null);
+		// console.log(res !== null);
 
 		return res !== null;
 	};
 
 	const fetchDarkSky = async (lat, long) => {
-		console.log("darksy fn: " + lat, long);
+		// // console.log("darksy fn: " + lat, long);
 
 		const proxy = "https://cors-anywhere.herokuapp.com/";
 		const api = `${proxy}https://api.darksky.net/forecast/6d4c83b905298eaad1db4cde293d2068/${lat},${long}`;
@@ -56,7 +56,7 @@ const TopBar = props => {
 				});
 			})
 			.catch(error => console.error(error));
-		console.log(res !== null);
+		// // console.log(res !== null);
 
 		return res !== null;
 	};
