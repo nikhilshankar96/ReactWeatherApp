@@ -1,17 +1,17 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect } from "react";
 import Weather from "./Weather";
 import WeatherDaily from "./WeatherDaily";
-import Context from "../store/context";
+// import Context from "../store/context";
 import Hourly from "./Hourly";
 import TodayHourly from "./TodayHourly";
-import M from "materialize-css";
+// import M from "materialize-css";
 
 const WeatherContent = props => {
-	const { loc } = props;
-	const { state, actions } = useContext(Context);
+	// const { state, actions } = useContext(Context);
+	const { state } = props;
 	useEffect(() => {
-		console.log("useEffect called");
-	}, [loc, state.data]);
+		// console.log("useEffect called");
+	}, [state.location]);
 	if (state.data == null) {
 		return null;
 	}

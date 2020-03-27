@@ -1,37 +1,18 @@
-import React, { useEffect, useContext, useState } from "react";
+import React, { useEffect, useContext } from "react";
 
 import Context from "../store/context";
 
 const TopBar = props => {
 	const { state, actions } = useContext(Context);
-	let weatherComp;
 
-	const { location } = state;
+	const { location } = props;
+	console.log("topbar location :" + location);
 
 	const getW = async q => {
-		// if (state.location) {
-		console.log(props.location);
-		if (props.location && props.location !== "") {
-			actions({
-				type: "setState",
-				payload: {
-					...state,
-					loaded: true,
-					location: props.location
-				}
-			});
-		}
-
-		// let q = state.location;
-		// }
-
-		console.log("GETW LOC: " + props.location);
-		// console.log("GETW LOC: " + q);
-
+		console.log("getw location : " + location);
 		const key = "d4a6d71c118517077ed0d0688b4dc2a6";
 		const res = await fetch(
-			`http://api.openweathermap.org/data/2.5/forecast?q=${props.location}&appid=${key}`
-			// `http://api.openweathermap.org/data/2.5/forecast?q=${q}&appid=${key}`
+			`http://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=${key}`
 		)
 			.then(res => res.json())
 			.then(data => {
@@ -42,37 +23,42 @@ const TopBar = props => {
 						loaded: true,
 						lat: data.city.coord.lat,
 						long: data.city.coord.lon,
-						location: data.city.name,
 						oWeather: data.list,
 						oWeatherLoaded: true
 					}
 				});
 			})
+			.then(() => fetchDarkSky(state.lat, state.long))
 			.catch(error => {
-				// actions({
-				// 	type: "setState",
-				// 	payload: {
-				// 		...state,
-				// 		loaded: false
-				// 	}
-				// });
 				console.log(error);
 			});
-		localStorage.setItem("state", JSON.stringify(state));
+		console.log(res !== null);
+
+		return res !== null;
 	};
 
-	// const locFromProps = () => {
-	// 	setLoc
-	// }
+	const fetchDarkSky = async (lat, long) => {
+		console.log("darksy fn: " + lat, long);
 
-	const setLocation = loc => {
-		actions({
-			type: "setState",
-			payload: {
-				...state,
-				location: loc
-			}
-		});
+		const proxy = "https://cors-anywhere.herokuapp.com/";
+		const api = `${proxy}https://api.darksky.net/forecast/6d4c83b905298eaad1db4cde293d2068/${lat},${long}`;
+		const res = await fetch(api)
+			.then(res => res.json())
+			.then(data => {
+				actions({
+					type: "setState",
+					payload: {
+						...state,
+						loaded: true,
+						data: data,
+						current: data.currently.time
+					}
+				});
+			})
+			.catch(error => console.error(error));
+		console.log(res !== null);
+
+		return res !== null;
 	};
 
 	const setLoc = e => {
@@ -81,21 +67,9 @@ const TopBar = props => {
 		loc !== "" && getW(loc);
 	};
 
-	document.onKeyDown = function(e) {
-		e = e || window.event;
-		switch (e.which || e.keyCode) {
-			case 13:
-				console.log("enter pressed");
-				setLoc();
-				break;
-		}
-	};
-
 	useEffect(() => {
-		// if (!props.location) {
-		getW(location);
-		// }
-	}, [location]);
+		getW(location).then(() => fetchDarkSky(state.lat, state.long));
+	}, [state.loaded, location]);
 
 	return (
 		state.location != "" && (
@@ -110,7 +84,6 @@ const TopBar = props => {
 						className='z-depth-2'
 						style={{
 							background: "#00bcd4"
-							// height: "60px"
 						}}
 					>
 						<div
@@ -121,7 +94,6 @@ const TopBar = props => {
 							}}
 						>
 							<input
-								// className='center'
 								id='search'
 								type='search'
 								style={{
@@ -132,7 +104,6 @@ const TopBar = props => {
 								}}
 								required
 								placeholder={location}
-								// value={location}
 							/>
 							<label className='label-icon' htmlFor='search'>
 								<i className='material-icons' style={{ color: "black" }}>

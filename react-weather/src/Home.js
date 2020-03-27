@@ -1,8 +1,7 @@
-import React, { useEffect, useContext, Fragment } from "react";
+import React, { useEffect, useContext } from "react";
 
 //components
 import TopBar from "./components/TopBar";
-import Footer from "./components/Footer";
 import WeatherContent from "./components/WeatherContent";
 import Dummy from "./components/dummy";
 import Spinner from "./components/Spinner";
@@ -12,29 +11,26 @@ import Context from "./store/context";
 
 //materialize
 import "materialize-css/dist/css/materialize.min.css";
-import M from "materialize-css";
 
 const Home = props => {
 	const { state, actions } = useContext(Context);
+	let locc = props.flag ? props.match.params.url.toString() : "Tokyo";
+	console.log("Home location : " + locc);
 
 	useEffect(() => {
-		if (props.location != "") {
-			console.log(props.location);
-
-			actions({
-				type: "setState",
-				payload: {
-					...state,
-					location: props.location
-				}
-			});
-		}
-	}, []);
+		actions({
+			type: "setState",
+			payload: {
+				...state,
+				location: locc
+			}
+		});
+	}, [state.location]);
 
 	return (
 		<div className='Home'>
 			{/* Nav */}
-			<TopBar location={props.location} flag={true} />
+			<TopBar location={locc} flag={true} />
 			{!state.loaded && (
 				<div style={{ height: "100%" }}>
 					<div style={{ height: "20%" }}></div>
@@ -43,10 +39,7 @@ const Home = props => {
 					<Dummy />
 				</div>
 			)}
-			{state.loaded && <WeatherContent loc={"Boston"} />}
-			<div className='footer z-depth-3 cyan darken-2 white-text'>
-				<Footer />
-			</div>
+			{state.loaded && state.oWeatherLoaded && <WeatherContent state={state} />}
 		</div>
 	);
 };
